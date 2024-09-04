@@ -1,2 +1,5 @@
-export {}
-console.log("HELLO WORLD FROM BGSCRIPTS")
+{ }
+
+chrome.sidePanel
+	.setPanelBehavior({ openPanelOnActionClick: true })
+	.catch((error) => console.error(error));
