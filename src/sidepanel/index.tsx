@@ -1,0 +1,3 @@
+function SidePanel() {
+  return <></>;
+}
