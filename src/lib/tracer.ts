@@ -1,5 +1,20 @@
+"use server";
+
 import { BuildTraceroute } from "@juzi/nodejs-traceroute";
 
-const tracer = BuildTraceroute();
+export function performTraceroute(host: string): Promise<string[]> {
+  return new Promise((resolve, reject) => {
+    const tracer = BuildTraceroute();
+    const result: string[] = [];
 
-export { tracer };
+    tracer.on("hop", (hop) => {
+      result.push(hop.ip);
+    });
+
+    tracer.on("close", () => {
+      resolve(result);
+    });
+
+    tracer.trace(host);
+  });
+}
